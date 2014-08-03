@@ -6,11 +6,11 @@ require 'fuzz/json/schema/version'
 Gem::Specification.new do |spec|
   spec.name          = "fuzz-json-schema"
   spec.version       = Fuzz::Json::Schema::VERSION
-  spec.authors       = ["Naoki Shimizu"]
-  spec.email         = ["naoki.shimizu@dena.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.authors       = ["deme0607"]
+  spec.email         = ["hcs0035@gmail.com"]
+  spec.summary       = %q{Fuzz parameter gemerator from json-schema}
+  spec.description   = %q{Fuzz parameter gemerator from json-schema}
+  spec.homepage      = "https://github.com/deme0607/fuzz-json-schema"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
