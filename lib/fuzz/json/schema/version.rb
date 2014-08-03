@@ -1,6 +1,6 @@
 module Fuzz
-  module Json
-    module Schema
+  module JSON
+    class Schema
       VERSION = "0.0.1"
     end
   end
