@@ -1,0 +1,35 @@
+{
+        "title": "Primitive Types Schema",
+        "type": "object",
+        "properties": {
+                "arrayKey": {
+                        "type": "array"
+                },
+                "booleanKey": {
+                        "type": "boolean"
+                },
+                "integerKey": {
+                        "type": "integer"
+                },
+                "numberKey": {
+                        "type": "number"
+                },
+                "nullKey": {
+                        "type": "null"
+                },
+                "objectKey": {
+                        "type": "object",
+                        "properties": {
+                          "nested_string": {
+                            "type": "string"
+                          },
+                          "nested_integer": {
+                            "type": "integer"
+                          }
+                        }
+                },
+                "stringKey": {
+                        "type": "string"
+                }
+        }
+}

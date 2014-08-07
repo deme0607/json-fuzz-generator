@@ -1,0 +1,17 @@
+{
+        "title": "Basic Schema",
+        "type": "object",
+        "properties": {
+                "id" : {
+                        "type": "integer"
+                },
+                "name": {
+                        "type": "string"
+                },
+                "age": {
+                        "description": "Age in years",
+                        "type": "integer",
+                        "minimum": 0
+                }
+        }
+}

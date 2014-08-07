@@ -5,7 +5,7 @@ require 'fuzz/json/schema/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "fuzz-json-schema"
-  spec.version       = Fuzz::Json::Schema::VERSION
+  spec.version       = Fuzz::JSON::Schema::VERSION
   spec.authors       = ["deme0607"]
   spec.email         = ["hcs0035@gmail.com"]
   spec.summary       = %q{Fuzz parameter gemerator from json-schema}
@@ -21,4 +21,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.6"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
+  spec.add_development_dependency "pry-byebug"
+  spec.add_development_dependency "json-schema"
 end

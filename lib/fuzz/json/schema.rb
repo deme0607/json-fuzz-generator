@@ -1,9 +1,6 @@
-require "fuzz/json/schema/version"
-
 module Fuzz
-  module Json
-    module Schema
-      # Your code goes here...
+  module JSON
+    class Schema
     end
   end
 end

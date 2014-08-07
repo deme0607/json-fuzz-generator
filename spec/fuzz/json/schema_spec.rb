@@ -1,11 +1,32 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe Fuzz::Json::Schema do
-  it 'has a version number' do
-    expect(Fuzz::Json::Schema::VERSION).not_to be nil
+describe Fuzz::JSON do
+  context "basic features" do
+    it "works" do
+      schema_file = File.join(SPEC_SCHEMA_ROOT, "basic_schema.json")
+      fuzz_params_list = Fuzz::JSON::Generator.generate(schema_file)
+
+      fuzz_params_list.each do |params|
+        expect(params).to include("id", "name", "age")
+        result = JSON::Validator.validate(schema_file, params)
+        expect(result).to eq(false)
+      end
+    end
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  context "primitive types" do
+    it "works" do
+      schema_file      = File.join(SPEC_SCHEMA_ROOT, "primitive_types.json")
+      generator        = Fuzz::JSON::Generator.new
+      default_param    = generator.default_param(schema_file)
+      fuzz_params_list = generator.generate(schema_file)
+
+      fuzz_params_list.each do |params|
+        expect(params).to include(*default_param.keys)
+        warn params
+        result = JSON::Validator.validate(schema_file, params)
+        expect(result).to eq(false)
+      end
+    end
   end
 end
