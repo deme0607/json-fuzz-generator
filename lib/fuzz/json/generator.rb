@@ -11,35 +11,43 @@ module Fuzz
       attr_accessor :generators
 
       def initialize
-        @generators = {}
-        @generators["type"]       = Fuzz::JSON::Generator::TypeAttribute.new
-        @generators["properties"] = Fuzz::JSON::Generator::PropertiesAttribute.new
-        @generators["minimum"]    = Fuzz::JSON::Generator::MinimumAttribute.new
+        @generators = {
+          "array"   => Fuzz::JSON::Generator::PrimitiveType::Array.new,
+          "boolean" => Fuzz::JSON::Generator::PrimitiveType::Boolean.new,
+          "integer" => Fuzz::JSON::Generator::PrimitiveType::Integer.new,
+          "null"    => Fuzz::JSON::Generator::PrimitiveType::Null.new,
+          "number"  => Fuzz::JSON::Generator::PrimitiveType::Number.new,
+          "object"  => Fuzz::JSON::Generator::PrimitiveType::Object.new,
+          "string"  => Fuzz::JSON::Generator::PrimitiveType::String.new,
+        }
       end
 
       def generate(schema)
-        json_schema = ::JSON::Validator.parse(open(schema).read)
+        schema = ::JSON::Validator.parse(open(schema).read) if schema.instance_of?(String)
         generated_params = []
-        valid_param = default_param(schema)
 
-        json_schema.each do |attr_name, attribute|
-          if @generators.key?(attr_name)
-            invalid_params = @generators[attr_name].generate(json_schema, self)
-            if invalid_params
-              invalid_params.each { |param| generated_params.push(valid_param.merge(param)) }
-            end
+        if type = schema["type"]
+          @generators[type].invalid_params(schema, self).each do |invalid_param|
+            generated_params.push(invalid_param)
           end
+        else
+          raise "No Type"
         end
 
         generated_params
       end
 
       def default_param(schema)
-        {
-          "id"   => 1,
-          "name" => "deme0607",
-          "age"  => 27,
-        }
+        generated_param = nil;
+        schema = ::JSON::Validator.parse(open(schema).read) if schema.instance_of?(String)
+
+        if type = schema["type"]
+          generated_param = @generators[type].valid_param(schema, self)
+        else
+          raise "No Type"
+        end
+
+        generated_param
       end
     end
   end
