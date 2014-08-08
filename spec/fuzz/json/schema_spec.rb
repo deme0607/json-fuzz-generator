@@ -269,4 +269,319 @@ describe Fuzz::JSON do
       }}
     end
   end
+
+  context "pattern" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"pattern" => "\\d+ takoyaki"},
+        },
+      }}
+    end
+  end
+
+  context "minLength" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"minLength" => 1},
+        },
+      }}
+    end
+  end
+
+  context "maxLength" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"maxLength" => 1},
+        },
+      }}
+    end
+  end
+
+  context "enum" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"enum" => ["hoge", 22, [0, 3], {"foo" => "bar"}]},
+        },
+      }}
+    end
+  end
+
+  context "multipleOf" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"multipleOf" => 1.3},
+        },
+      }}
+    end
+  end
+
+  context "patternProperties" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"           => "http://json-schema.org/draft-04/schema#",
+        "patternProperties" => {
+          "\\d+ takoyaki" => {"type" => "integer"},
+        },
+      }}
+    end
+  end
+
+  context "additionalProperties" do
+    context "given no properties" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "properties" => {
+            "a" => {"type" => "integer"},
+          },
+          "additionalProperties" => false,
+        }}
+      end
+    end
+
+    context "given property of type" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "properties" => {
+            "a" => {"type" => "integer"},
+          },
+          "additionalProperties" => {"type" => "string"},
+        }}
+      end
+    end
+
+    context "with patternProperties" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"           => "http://json-schema.org/draft-04/schema#",
+          "patternProperties" => {
+            "\\d+ takoyaki" => {"type" => "integer"},
+          },
+          "additionalProperties" => false,
+        }}
+      end
+    end
+  end
+
+  context "items" do
+    context "given single property" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema" => "http://json-schema.org/draft-04/schema#",
+          "items"   => {"type" => "integer"},
+        }}
+      end
+    end
+
+    context "given multiple properties" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema" => "http://json-schema.org/draft-04/schema#",
+          "items"   => [
+            {"type" => "integer"},
+            {"type" => "string"},
+          ],
+        }}
+      end
+    end
+
+    context "with additionalItems" do
+      context "given false" do
+        it_behaves_like Fuzz::JSON::Generator do
+          let(:schema) {{
+            "$schema" => "http://json-schema.org/draft-04/schema#",
+            "items"   => [
+              {"type" => "integer"},
+              {"type" => "string"},
+            ],
+            "additionalItems" => false,
+          }}
+        end
+      end
+
+      context "given property" do
+        it_behaves_like Fuzz::JSON::Generator do
+          let(:schema) {{
+            "$schema" => "http://json-schema.org/draft-04/schema#",
+            "items"   => [
+              {"type" => "integer"},
+              {"type" => "string"},
+            ],
+            "additionalItems" => {"type" => "integer"},
+          }}
+        end
+      end
+    end
+  end
+
+  context "self reference" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "type"       => "object",
+        "properties" => {
+          "a" => {"type" => "integer"},
+          "b" => {"$ref" => "#"},
+        },
+      }}
+    end
+  end
+
+  %w[ip-address ipv6 time date date-time uri].each do |format|
+    context "format #{format}" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "type"       => "object",
+          "properties" => {
+            "a" => {
+              "type"   => "string",
+              "format" => "format",
+            },
+          },
+        }}
+      end
+    end
+  end
+
+  context "format with union types" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "type"       => "object",
+        "properties" => {
+          "a" => {
+            "type"   => ["string", "null"],
+            "format" => "ip-address",
+          },
+        },
+      }}
+    end
+  end
+
+  context "dependencies" do
+    context "given single property" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "type"       => "object",
+          "properties" => {
+            "a" => {"type" => "integer"},
+            "b" => {"type" => "integer"},
+          },
+          "dependencies" => {"a" => ["b"]},
+        }}
+      end
+    end
+
+    context "given multiple properties" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "type"       => "object",
+          "properties" => {
+            "a" => {"type" => "integer"},
+            "b" => {"type" => "integer"},
+          },
+          "dependencies" => {"a" => ["b", "c"]},
+        }}
+      end
+    end
+  end
+
+  context "default" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "type"       => "object",
+        "properties" => {
+          "a" => {"type" => "integer", "default" => 22},
+          "b" => {"type" => "integer"},
+        },
+      }}
+    end
+
+    context "with readonly" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "type"       => "object",
+          "properties" => {
+            "a" => {"type" => "integer", "default" => 22, "readonly" => true},
+            "b" => {"type" => "integer"},
+          },
+        }}
+      end
+    end
+  end
+
+  %w[allOf anyOf oneOf].each do |keyword|
+    context keyword do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema" => "http://json-schema.org/draft-04/schema#",
+          keyword   => [
+            {
+              "properties" => {"a" => {"type" => "string"}},
+              "required"   => ["a"],
+            },
+            {
+              "properties" => {"b" => {"type" => "integer"}},
+            },
+          ]
+        }}
+      end
+    end
+  end
+
+  context "not" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
+        "properties" => {
+          "a" => {"not" => {"type" => ["string", "boolean"]}},
+        },
+      }}
+    end
+
+    context "with sub schema" do
+      it_behaves_like Fuzz::JSON::Generator do
+        let(:schema) {{
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
+          "properties" => {"a" => {"not" => {"anyOf" => [
+            {"type" => ["string", "boolean"]},
+            {"type" => "object", "properties" => {"b" => {"type" => "boolean"}}},
+          ]}}},
+        }}
+      end
+    end
+  end
+
+  context "definitions" do
+    it_behaves_like Fuzz::JSON::Generator do
+      let(:schema) {{
+        "$schema"     => "http://json-schema.org/draft-04/schema#",
+        "type"        => "array",
+        "items"       => {"$ref" => "#/definitions/positiveInteger"},
+        "definitions" => {
+          "positiveInteger" => {
+            "type"             => "integer",
+            "minimum"          => 0,
+            "exclusiveMinimum" => true,
+          },
+        },
+      }}
+    end
+  end
 end
