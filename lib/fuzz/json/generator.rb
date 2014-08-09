@@ -27,11 +27,17 @@ module Fuzz
         generated_params = []
 
         if type = schema["type"]
+          raise "No generator type for #{type}" unless @generators.key?(type)
+          @generators[type].invalid_params(schema, self).each do |invalid_param|
+            generated_params.push(invalid_param)
+          end
+        elsif schema.key?("properties")
+          type = "object"
           @generators[type].invalid_params(schema, self).each do |invalid_param|
             generated_params.push(invalid_param)
           end
         else
-          raise "No Type"
+          raise "Not impremented generator for schema:#{schema}"
         end
 
         generated_params
@@ -42,9 +48,13 @@ module Fuzz
         schema = ::JSON::Validator.parse(open(schema).read) if schema.instance_of?(String)
 
         if type = schema["type"]
+          raise "No generator type for #{type}" unless @generators.key?(type)
+          generated_param = @generators[type].valid_param(schema, self)
+        elsif schema.key?("properties")
+          type = "object"
           generated_param = @generators[type].valid_param(schema, self)
         else
-          raise "No Type"
+          raise "Not impremented generator for schema:#{schema}"
         end
 
         generated_param
