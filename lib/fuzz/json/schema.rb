@@ -1,6 +1,6 @@
 module Fuzz
   module JSON
-    class Schema
+    module Schema
     end
   end
 end

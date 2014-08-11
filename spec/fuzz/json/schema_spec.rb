@@ -1,47 +1,42 @@
 require "spec_helper"
 
 describe Fuzz::JSON do
-  context "basic features" do
-    it "works" do
-      schema_file = File.join(SPEC_SCHEMA_ROOT, "basic_schema.json")
-      fuzz_params_list = Fuzz::JSON::Generator.generate(schema_file)
+  #context "basic features" do
+  #  it "works" do
+  #    schema_file = File.join(SPEC_SCHEMA_ROOT, "basic_schema.json")
+  #    fuzz_params_list = Fuzz::JSON::Generator.generate(schema_file)
 
-      fuzz_params_list.each do |params|
-        expect(params).to include("id", "name", "age")
-        result = JSON::Validator.validate(schema_file, params)
-        expect(result).to eq(false)
-      end
-    end
-  end
+  #    fuzz_params_list.each do |params|
+  #      result = JSON::Validator.validate(schema_file, params)
+  #      expect(result).to eq(false)
+  #    end
+  #  end
+  #end
 
-  context "primitive types" do
-    it "works" do
-      schema_file      = File.join(SPEC_SCHEMA_ROOT, "primitive_types.json")
-      generator        = Fuzz::JSON::Generator.new
-      default_param    = generator.default_param(schema_file)
-      fuzz_params_list = generator.generate(schema_file)
+  #context "primitive types" do
+  #  it "works" do
+  #    schema_file      = File.join(SPEC_SCHEMA_ROOT, "primitive_types.json")
+  #    default_param    = Fuzz::JSON::Generator.default_param(schema_file)
+  #    fuzz_params_list = Fuzz::JSON::Generator.generate(schema_file)
 
-      fuzz_params_list.each do |params|
-        expect(params).to include(*default_param.keys)
-        result = JSON::Validator.validate(schema_file, params)
-        expect(result).to eq(false)
-      end
-    end
-  end
+  #    fuzz_params_list.each do |params|
+  #      result = JSON::Validator.validate(schema_file, params)
+  #      expect(result).to eq(false)
+  #    end
+  #  end
+  #end
 
   shared_examples_for Fuzz::JSON::Generator do
-    let(:generator) { Fuzz::JSON::Generator.new }
-
     context "#default_param" do
       it "can generate valid parameter" do
-        valid_parameter = generator.default_param(schema)
+        valid_parameter = Fuzz::JSON::Generator.default_param(schema)
         expect(JSON::Validator.validate(schema, valid_parameter)).to eq(true)
       end
     end
 
     context "#generate" do
       it "can generate invalid parameter" do
-        invalid_parameters = generator.generate(schema)
+        invalid_parameters = Fuzz::JSON::Generator.generate(schema)
         invalid_parameters.each do |invalid_param|
           expect(JSON::Validator.validate(schema, invalid_param)).to eq(false)
         end

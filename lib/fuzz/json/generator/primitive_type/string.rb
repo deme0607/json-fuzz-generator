@@ -1,14 +1,26 @@
 module Fuzz
   module JSON
-    class Generator
+    module Generator
       class PrimitiveType
         class String
-          def invalid_params(attributes, generator)
-            [1]
-          end
+          class << self
+            def invalid_params(attributes)
+              generated_params = []
+              if type = attributes["type"]
+                valid_types = [type].flatten
+                Fuzz::JSON::Generator::PrimitiveType.invalid_params_by_type(attributes).each do |invalid_param|
+                  generated_params.push(invalid_param)
+                end
+              else
+                generated_params.push(1)
+              end
 
-          def valid_param(attributes, generator)
-            "hoge"
+              generated_params
+            end
+
+            def valid_param(attributes = {})
+              "hoge"
+            end
           end
         end
       end
