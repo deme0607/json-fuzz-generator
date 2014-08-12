@@ -42,10 +42,12 @@ module Fuzz
               generated_params.push(invalid_param)
             end
           end
-        elsif schema.key?("properties")
+        elsif (schema.key?("properties") || schema.key?("properties"))
           generators("object").invalid_params(schema).each do |invalid_param|
             generated_params.push(invalid_param)
           end
+        elsif schema.empty?
+          # do nothing
         else
           raise "Not impremented generator for schema:#{schema}"
         end
@@ -63,6 +65,9 @@ module Fuzz
           generated_param = generators(type).valid_param(schema)
         elsif schema.key?("properties")
           generated_param = generators("object").valid_param(schema)
+        elsif schema.empty?
+          type, generator = Fuzz::JSON::Generator::PrimitiveType.type_to_class_map.to_a.sample
+          generated_param = generator.valid_param
         else
           raise "Not impremented generator for schema:#{schema}"
         end
