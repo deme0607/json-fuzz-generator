@@ -52,6 +52,10 @@ module Fuzz
           generators("number").invalid_params(schema).each do |invalid_param|
             generated_params.push(invalid_param)
           end
+        elsif (schema.key?("minItems") || schema.key?("maxItems"))
+          generators("array").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
         else
           raise "Not impremented generator for schema:#{schema}"
         end
@@ -74,6 +78,8 @@ module Fuzz
           generated_param = generator.valid_param
         elsif (schema.key?("minimum") || schema.key?("maximum"))
           generators("number").valid_param(schema)
+        elsif (schema.key?("minItems") || schema.key?("maxItems"))
+          generators("array").valid_param(schema)
         else
           raise "Not impremented generator for schema:#{schema}"
         end

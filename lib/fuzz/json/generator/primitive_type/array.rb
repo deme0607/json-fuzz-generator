@@ -12,14 +12,30 @@ module Fuzz
                   generated_params.push(invalid_param)
                 end
               else
-                generated_params.push({})
+                #generated_params.push({})
+              end
+
+              attributes.each do |keyword, attribute|
+                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                  klass.invalid_params(attributes).each do |invalid_param|
+                    generated_params << invalid_param
+                  end
+                end
               end
               
               generated_params
             end
 
             def valid_param(attributes = {})
-              ["sample", "array"]
+              valid_params = []
+
+              attributes.each do |keyword, attribute|
+                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                  valid_params << klass.valid_param(attributes)
+                end
+              end
+
+              valid_params.empty? ? ["sample", "array"] : valid_params.sample
             end
           end
         end

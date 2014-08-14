@@ -7,8 +7,10 @@ module Fuzz
         class << self
           def keyword_to_class_map
             {
-              "minimum" => Fuzz::JSON::Generator::Keyword::Minimum,
-              "maximum" => Fuzz::JSON::Generator::Keyword::Maximum,
+              "minimum"  => Fuzz::JSON::Generator::Keyword::Minimum,
+              "maximum"  => Fuzz::JSON::Generator::Keyword::Maximum,
+              "minItems" => Fuzz::JSON::Generator::Keyword::MinItems,
+              "maxItems" => Fuzz::JSON::Generator::Keyword::MaxItems,
             }
           end
         end
