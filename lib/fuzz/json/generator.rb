@@ -48,6 +48,10 @@ module Fuzz
           end
         elsif schema.empty?
           # do nothing
+        elsif (schema.key?("minimum") || schema.key?("maximum"))
+          generators("number").invalid_params(schema).each do |invalid_param|
+            generated_params.push(invalid_param)
+          end
         else
           raise "Not impremented generator for schema:#{schema}"
         end
@@ -68,6 +72,8 @@ module Fuzz
         elsif schema.empty?
           type, generator = Fuzz::JSON::Generator::PrimitiveType.type_to_class_map.to_a.sample
           generated_param = generator.valid_param
+        elsif (schema.key?("minimum") || schema.key?("maximum"))
+          generators("number").valid_param(schema)
         else
           raise "Not impremented generator for schema:#{schema}"
         end

@@ -27,7 +27,8 @@ module Fuzz
               if required_properties = attributes["required"]
                 required_properties.each do |property|
                   template = Fuzz::JSON::Generator.default_param(attributes)
-                  generated_params.push(template.delete(property))
+                  template.delete(property)
+                  generated_params.push(template)
                 end
               end
 
