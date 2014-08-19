@@ -76,6 +76,10 @@ module Fuzz
           Fuzz::JSON::Generator::Keyword::Enum.invalid_params(schema).each do |invalid_param|
             generated_params << invalid_param
           end
+        elsif schema.key?("multipleOf")
+          generators("number").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
         else
           raise "Not impremented generator for schema:#{schema}"
         end
@@ -110,6 +114,8 @@ module Fuzz
           generated_param = generators("string").valid_param(schema)
         elsif schema.key?("enum")
           generated_param = Fuzz::JSON::Generator::Keyword::Enum.valid_param(schema)
+        elsif schema.key?("multipleOf")
+          generated_param = generators("number").valid_param(schema)
         else
           raise "Not impremented generator for schema:#{schema}"
         end

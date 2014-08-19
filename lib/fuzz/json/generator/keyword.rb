@@ -21,6 +21,7 @@ module Fuzz
               "minLength"     => Fuzz::JSON::Generator::Keyword::MinLength,
               "maxLength"     => Fuzz::JSON::Generator::Keyword::MaxLength,
               "enum"          => Fuzz::JSON::Generator::Keyword::Enum,
+              "multipleOf"    => Fuzz::JSON::Generator::Keyword::MultipleOf,
             }
           end
         end
