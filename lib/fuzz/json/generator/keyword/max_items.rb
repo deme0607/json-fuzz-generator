@@ -13,7 +13,9 @@ module Fuzz
               invalid_param    = []
 
               (max_items + 1).times do
-                invalid_param << Fuzz::JSON::Generator.default_param(attributes)
+                item = Fuzz::JSON::Generator.default_param(attributes)
+                item = "null" if item.nil?
+                invalid_param << item
               end
 
               generated_params << invalid_param

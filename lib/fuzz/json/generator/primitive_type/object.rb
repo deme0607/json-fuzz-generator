@@ -7,16 +7,6 @@ module Fuzz
             def invalid_params(attributes)
               generated_params = []
 
-              if (attributes.key?("members") || attributes.key?("properties"))
-                properties = attributes["members"] || attributes["properties"]
-                properties.each do |key, attribute|
-                  Fuzz::JSON::Generator.generate(attribute).each do |invalid_param|
-                    template = Fuzz::JSON::Generator.default_param(attributes)
-                    generated_params.push(template.merge(key => invalid_param))
-                  end
-                end
-              end
-
               if type = attributes["type"]
                 valid_types = [type].flatten
                 Fuzz::JSON::Generator::PrimitiveType.invalid_params_by_type(attributes).each do |invalid_param|
@@ -24,11 +14,11 @@ module Fuzz
                 end
               end
 
-              if required_properties = attributes["required"]
-                required_properties.each do |property|
-                  template = Fuzz::JSON::Generator.default_param(attributes)
-                  template.delete(property)
-                  generated_params.push(template)
+              attributes.each do |keyword, attribute|
+                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                  klass.invalid_params(attributes).each do |invalid_param|
+                    generated_params << invalid_param
+                  end
                 end
               end
 
@@ -36,17 +26,18 @@ module Fuzz
             end
 
             def valid_param(attributes = {})
-              generated_param = {}
+              #generated_params = []
+              generated_params = {}
 
-              if (attributes.key?("members") || attributes.key?("properties"))
-                properties = attributes["members"] || attributes["properties"]
-
-                properties.each do |key, attribute|
-                  generated_param[key] = Fuzz::JSON::Generator.default_param(attribute)
+              attributes.each do |keyword, attribute|
+                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                  #generated_params << klass.valid_param(attributes)
+                  generated_params.merge!(klass.valid_param(attributes))
                 end
               end
 
-              generated_param
+              #generated_params.empty? ? {} : generated_params.sample
+              generated_params
             end
           end
         end

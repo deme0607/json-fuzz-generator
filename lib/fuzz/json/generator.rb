@@ -42,7 +42,7 @@ module Fuzz
               generated_params.push(invalid_param)
             end
           end
-        elsif (schema.key?("properties") || schema.key?("properties"))
+        elsif (schema.key?("members") || schema.key?("properties"))
           generators("object").invalid_params(schema).each do |invalid_param|
             generated_params.push(invalid_param)
           end
@@ -54,6 +54,26 @@ module Fuzz
           end
         elsif (schema.key?("minItems") || schema.key?("maxItems"))
           generators("array").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif (schema.key?("minProperties") || schema.key?("maxProperties"))
+          generators("object").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif schema.key?("uniqueItems")
+          generators("array").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif schema.key?("pattern")
+          generators("string").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif (schema.key?("minLength") || schema.key?("maxLength"))
+          generators("string").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif schema.key?("enum")
+          Fuzz::JSON::Generator::Keyword::Enum.invalid_params(schema).each do |invalid_param|
             generated_params << invalid_param
           end
         else
@@ -69,7 +89,7 @@ module Fuzz
 
         if type = schema["type"]
           type = type.sample if type.instance_of?(Array)
-          type = %w[array boolean integer null number object string].sample if type == "any"
+          type = all_types.sample if type == "any"
           generated_param = generators(type).valid_param(schema)
         elsif schema.key?("properties")
           generated_param = generators("object").valid_param(schema)
@@ -77,9 +97,19 @@ module Fuzz
           type, generator = Fuzz::JSON::Generator::PrimitiveType.type_to_class_map.to_a.sample
           generated_param = generator.valid_param
         elsif (schema.key?("minimum") || schema.key?("maximum"))
-          generators("number").valid_param(schema)
+          generated_param = generators("number").valid_param(schema)
         elsif (schema.key?("minItems") || schema.key?("maxItems"))
-          generators("array").valid_param(schema)
+          generated_param = generators("array").valid_param(schema)
+        elsif (schema.key?("minProperties") || schema.key?("maxProperties"))
+          generated_param = generators("object").valid_param(schema)
+        elsif schema.key?("uniqueItems")
+          generated_param = generators("array").valid_param(schema)
+        elsif schema.key?("pattern")
+          generated_param = generators("string").valid_param(schema)
+        elsif (schema.key?("minLength") || schema.key?("maxLength"))
+          generated_param = generators("string").valid_param(schema)
+        elsif schema.key?("enum")
+          generated_param = Fuzz::JSON::Generator::Keyword::Enum.valid_param(schema)
         else
           raise "Not impremented generator for schema:#{schema}"
         end

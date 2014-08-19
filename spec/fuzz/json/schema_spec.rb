@@ -30,7 +30,8 @@ describe Fuzz::JSON do
     context "#default_param" do
       it "can generate valid parameter" do
         valid_parameter = Fuzz::JSON::Generator.default_param(schema)
-        expect(JSON::Validator.validate(schema, valid_parameter)).to eq(true)
+        expect(valid_parameter).to be_matching_schema(schema)
+        #expect(JSON::Validator.validate(schema, valid_parameter)).to eq(true)
       end
     end
 
@@ -38,7 +39,8 @@ describe Fuzz::JSON do
       it "can generate invalid parameter" do
         invalid_parameters = Fuzz::JSON::Generator.generate(schema)
         invalid_parameters.each do |invalid_param|
-          expect(JSON::Validator.validate(schema, invalid_param)).to eq(false)
+          expect(invalid_param).to be_not_matching_schema(schema)
+          #expect(JSON::Validator.validate(schema, invalid_param)).to eq(false)
         end
       end
     end
@@ -194,7 +196,7 @@ describe Fuzz::JSON do
     end
   end
 
-  context "strict option" do
+  xcontext "strict option" do
     shared_examples_for Fuzz::JSON::Generator do
       let(:generator) { Fuzz::JSON::Generator.new }
 
@@ -265,7 +267,7 @@ describe Fuzz::JSON do
     end
   end
 
-  context "pattern" do
+  xcontext "pattern" do
     it_behaves_like Fuzz::JSON::Generator do
       let(:schema) {{
         "$schema"    => "http://json-schema.org/draft-04/schema#",

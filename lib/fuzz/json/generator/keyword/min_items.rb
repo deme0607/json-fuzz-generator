@@ -29,7 +29,9 @@ module Fuzz
               generated_param = []
               
               min_items.times do
-                generated_param << Fuzz::JSON::Generator.default_param(attributes)
+                item = Fuzz::JSON::Generator.default_param(attributes)
+                item = "null" if item.nil?
+                generated_param << "null"
               end
 
               generated_param

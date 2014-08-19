@@ -24,8 +24,10 @@ module Fuzz
               maximum_value = attributes["maximum"]
               raise "No maximum keyword given: #{attributes}" unless maximum_value
 
+              unit_value = (attributes.key?("type") && attributes["type"] == "integer") ? 1 : 0.1
+              maximum_value -= unit_value if attributes["exclusiveMaximum"]
+
               if minimum_value = attributes["minimum"]
-                unit_value = (attributes.key?("type") && attributes["type"] == "integer") ? 1 : 0.1
                 minimum_value += unit_value if attributes["exclusiveMinimum"]
                 if attributes["exclusiveMaximum"]
                   return Random.rand(minimum_value...maximum_value)

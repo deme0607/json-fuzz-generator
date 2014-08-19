@@ -1,4 +1,5 @@
 require "json-schema"
+require "randexp"
 require "fuzz/json/schema"
 require "fuzz/json/generator"
 
