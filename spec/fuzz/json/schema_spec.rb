@@ -242,7 +242,7 @@ describe Fuzz::JSON do
       end
     end
 
-    context "with patternProperties" do
+    xcontext "with patternProperties" do
       it_behaves_like Fuzz::JSON::Generator do
         let(:schema) {{
           "$schema"           => "http://json-schema.org/draft-04/schema#",
@@ -322,7 +322,7 @@ describe Fuzz::JSON do
     end
   end
 
-  context "patternProperties" do
+  xcontext "patternProperties" do
     it_behaves_like Fuzz::JSON::Generator do
       let(:schema) {{
         "$schema"           => "http://json-schema.org/draft-04/schema#",
@@ -358,7 +358,7 @@ describe Fuzz::JSON do
       end
     end
 
-    context "with patternProperties" do
+    xcontext "with patternProperties" do
       it_behaves_like Fuzz::JSON::Generator do
         let(:schema) {{
           "$schema"           => "http://json-schema.org/draft-04/schema#",
@@ -422,7 +422,7 @@ describe Fuzz::JSON do
     end
   end
 
-  context "self reference" do
+  xcontext "self reference" do
     it_behaves_like Fuzz::JSON::Generator do
       let(:schema) {{
         "$schema"    => "http://json-schema.org/draft-04/schema#",
@@ -444,7 +444,7 @@ describe Fuzz::JSON do
           "properties" => {
             "a" => {
               "type"   => "string",
-              "format" => "format",
+              "format" => format,
             },
           },
         }}
@@ -565,7 +565,7 @@ describe Fuzz::JSON do
     end
   end
 
-  context "definitions" do
+  xcontext "definitions" do
     it_behaves_like Fuzz::JSON::Generator do
       let(:schema) {{
         "$schema"     => "http://json-schema.org/draft-04/schema#",
