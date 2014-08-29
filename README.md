@@ -1,12 +1,12 @@
-# Fuzz::Json::Schema
+# JSON::Fuzz::Generator
 
-TODO: Write a gem description
+Fuzzing Parameter Generator from JSON Schema
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'fuzz-json-schema'
+    gem 'json-fuzz-generator'
 
 And then execute:
 
@@ -14,15 +14,86 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install fuzz-json-schema
+    $ gem install json-fuzz-generator
 
 ## Usage
 
-TODO: Write usage instructions here
+### input JSON Schema
+
+```json:input_schema.json
+{
+  "title": "Basic Schema",
+  "type": "object",
+  "properties": {
+    "id" : {
+      "type": "integer",
+      "minimum": 0
+    },
+    "name": {
+      "type": "string"
+    },
+    "birthday": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}
+```
+### generate valid param
+
+```ruby
+require "json-fuzz-generator"
+ 
+JSON::Fuzz::Generator.default_param(schema_file)
+# => {"id"=>0, "name"=>"hoge", "birthday"=>"1992-06-27"}
+```
+### generate invalid params
+
+```ruby
+require "json-fuzz-generator"
+ 
+JSON::Fuzz::Generator.generate(schema_file)
+# => 
+#[
+#  ["sample", "array"],
+#  true,
+#  73,
+#  nil,
+#  0.34259093948835795,
+#  "hoge",
+#  {"id"=>"a", "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>"1", "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>0.1, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>["sample", "array"], "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>false, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>nil, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>0.0, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>{}, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>"hoge", "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>-1, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>["sample", "array"], "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>true, "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>97, "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>nil, "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>0.7547537108664406, "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>{}, "birthday"=>"1992-06-27"},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>["sample", "array"]},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>false},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>11},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>nil},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>0.5380909041403419},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>{}},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-32"},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>"n2010-01-01"},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-1-01"},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-1"},
+#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-01n"},
+#]
+```
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/fuzz-json-schema/fork )
+1. Fork it ( https://github.com/deme0607/json-fuzz-generator/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
