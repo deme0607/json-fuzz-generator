@@ -80,6 +80,20 @@ module Fuzz
           generators("number").invalid_params(schema).each do |invalid_param|
             generated_params << invalid_param
           end
+        elsif schema.key?("items")
+          generators("array").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif schema.key?("$ref")
+          raise "not impremented yet"
+        elsif (schema.key?("allOf") || schema.key?("anyOf") || schema.key?("oneOf"))
+          generators("object").invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
+        elsif schema.key?("not")
+          Fuzz::JSON::Generator::Keyword::Not.invalid_params(schema).each do |invalid_param|
+            generated_params << invalid_param
+          end
         else
           raise "Not impremented generator for schema:#{schema}"
         end
@@ -116,6 +130,18 @@ module Fuzz
           generated_param = Fuzz::JSON::Generator::Keyword::Enum.valid_param(schema)
         elsif schema.key?("multipleOf")
           generated_param = generators("number").valid_param(schema)
+        elsif schema.key?("items")
+          generated_param = generators("array").valid_param(schema)
+        elsif schema.key?("$ref")
+          raise "not impremented yet"
+        elsif schema.key?("allOf")
+          generated_param = Fuzz::JSON::Generator::Keyword::AllOf.valid_param(schema)
+        elsif schema.key?("anyOf")
+          generated_param = Fuzz::JSON::Generator::Keyword::AnyOf.valid_param(schema)
+        elsif schema.key?("oneOf")
+          generated_param = Fuzz::JSON::Generator::Keyword::OneOf.valid_param(schema)
+        elsif schema.key?("not")
+          generated_param = Fuzz::JSON::Generator::Keyword::Not.valid_param(schema)
         else
           raise "Not impremented generator for schema:#{schema}"
         end

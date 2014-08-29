@@ -17,7 +17,8 @@ module Fuzz
               end
 
               attributes.each do |keyword, attribute|
-                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                #if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                if klass = keyword_to_class_map[keyword]
                   klass.invalid_params(attributes).each do |invalid_param|
                     generated_params << invalid_param
                   end
@@ -31,12 +32,21 @@ module Fuzz
               valid_params = []
 
               attributes.each do |keyword, attribute|
-                if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
-                  valid_params << klass.valid_param(attributes)
+                #if klass = Fuzz::JSON::Generator::Keyword.keyword_to_class_map[keyword]
+                if klass = keyword_to_class_map[keyword]
+                  valid_params << klass.valid_param(attributes).to_f
                 end
               end
 
               valid_params.empty? ? rand : valid_params.sample
+            end
+
+            def keyword_to_class_map
+              {
+                "minimum"       => Fuzz::JSON::Generator::Keyword::Minimum,
+                "maximum"       => Fuzz::JSON::Generator::Keyword::Maximum,
+                "multipleOf"    => Fuzz::JSON::Generator::Keyword::MultipleOf,
+              }
             end
           end
         end
