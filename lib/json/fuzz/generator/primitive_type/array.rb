@@ -1,4 +1,4 @@
-module JSON 
+module JSON
   module Fuzz
     module Generator
       class PrimitiveType
@@ -20,7 +20,7 @@ module JSON
                   end
                 end
               end
-              
+
               generated_params
             end
 
@@ -33,7 +33,7 @@ module JSON
                 end
               end
 
-              valid_params.empty? ? ["sample", "array"] : valid_params.sample
+              valid_params.empty? ? ["sample", "array"] : [valid_params.sample]
             end
 
             def keyword_to_class_map
@@ -50,4 +50,3 @@ module JSON
     end
   end
 end
-
