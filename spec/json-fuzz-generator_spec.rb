@@ -6,7 +6,6 @@ describe JSON::Fuzz do
       it "can generate valid parameter" do
         valid_parameter = JSON::Fuzz::Generator.default_param(schema)
         expect(valid_parameter).to be_matching_schema(schema)
-        #expect(JSON::Validator.validate(schema, valid_parameter)).to eq(true)
       end
     end
 
@@ -15,7 +14,6 @@ describe JSON::Fuzz do
         invalid_parameters = JSON::Fuzz::Generator.generate(schema)
         invalid_parameters.each do |invalid_param|
           expect(invalid_param).to be_not_matching_schema(schema)
-          #expect(JSON::Validator.validate(schema, invalid_param)).to eq(false)
         end
       end
     end
@@ -364,6 +362,17 @@ describe JSON::Fuzz do
             {"type" => "integer"},
             {"type" => "string"},
           ],
+        }}
+      end
+    end
+
+    context "given array style" do
+      it_behaves_like JSON::Fuzz::Generator do
+        let(:schema) {{
+          "$schema" => "http://json-schema.org/draft-04/schema#",
+          "items"   => {
+            "type" => "boolean"
+          },
         }}
       end
     end
