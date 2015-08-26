@@ -368,6 +368,17 @@ describe JSON::Fuzz do
       end
     end
 
+    context "given array style" do
+      it_behaves_like JSON::Fuzz::Generator do
+        let(:schema) {{
+          "$schema" => "http://json-schema.org/draft-04/schema#",
+          "items"   => {
+            "type" => "boolean"
+          },
+        }}
+      end
+    end
+
     context "with additionalItems" do
       context "given false" do
         it_behaves_like JSON::Fuzz::Generator do

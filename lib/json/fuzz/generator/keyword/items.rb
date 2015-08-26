@@ -51,7 +51,7 @@ module JSON
               generated_param = []
 
               if items.instance_of?(Hash)
-                generated_param = JSON::Fuzz::Generator.default_param(items)
+                generated_param << JSON::Fuzz::Generator.default_param(items)
               else
                 items.each do |item|
                   generated_param << JSON::Fuzz::Generator.default_param(item)
