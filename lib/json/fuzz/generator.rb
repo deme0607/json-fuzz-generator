@@ -20,13 +20,14 @@ module JSON
         else
           raise "no generator for #{type}"
         end
-  j   end
+        j   end
 
+      # Generate invalid data
       def generate(schema)
-        schema = ::JSON::Validator.parse(open(schema).read) if schema.instance_of?(String)
+        schema = JSON.parse(open(schema).read) if schema.instance_of?(String)
         generated_params = []
 
-        if type = schema["type"]
+        if (type = schema["type"])
           if type.instance_of?(Array) # union type
             all_types.each do |target_type|
               if type.include?(target_type)
@@ -34,7 +35,7 @@ module JSON
                   generated_params.push(invalid_param)
                 end
               else
-                generated_params.push(generators(target_type).valid_param("type" => target_type))
+                generated_params.push(generators(target_type).invalid_params("type" => target_type))
               end
             end
           elsif type == "any"
@@ -97,58 +98,56 @@ module JSON
             generated_params << invalid_param
           end
         else
-          raise "Not impremented generator for schema:#{schema}"
+          raise "Not implemented generator for schema:#{schema}"
         end
 
         generated_params
       end
 
+      # Generate valid data
       def default_param(schema)
-        schema = ::JSON::Validator.parse(open(schema).read) if schema.instance_of?(String)
-        generated_param = nil;
+        schema = JSON.parse(open(schema).read) if schema.instance_of?(String)
 
-        if type = schema["type"]
+        if (type = schema["type"])
           type = type.sample if type.instance_of?(Array)
           type = all_types.sample if type == "any"
-          generated_param = generators(type).valid_param(schema)
+          generators(type).valid_param(schema)
         elsif schema.key?("properties")
-          generated_param = generators("object").valid_param(schema)
+          generators("object").valid_param(schema)
         elsif schema.empty?
-          type, generator = JSON::Fuzz::Generator::PrimitiveType.type_to_class_map.to_a.sample
-          generated_param = generator.valid_param
+          _, generator = JSON::Fuzz::Generator::PrimitiveType.type_to_class_map.to_a.sample
+          generator.valid_param
         elsif (schema.key?("minimum") || schema.key?("maximum"))
-          generated_param = generators("number").valid_param(schema)
+          generators("number").valid_param(schema)
         elsif (schema.key?("minItems") || schema.key?("maxItems"))
-          generated_param = generators("array").valid_param(schema)
+          generators("array").valid_param(schema)
         elsif (schema.key?("minProperties") || schema.key?("maxProperties"))
-          generated_param = generators("object").valid_param(schema)
+          generators("object").valid_param(schema)
         elsif schema.key?("uniqueItems")
-          generated_param = generators("array").valid_param(schema)
+          generators("array").valid_param(schema)
         elsif schema.key?("pattern")
-          generated_param = generators("string").valid_param(schema)
+          generators("string").valid_param(schema)
         elsif (schema.key?("minLength") || schema.key?("maxLength"))
-          generated_param = generators("string").valid_param(schema)
+          generators("string").valid_param(schema)
         elsif schema.key?("enum")
-          generated_param = JSON::Fuzz::Generator::Keyword::Enum.valid_param(schema)
+          JSON::Fuzz::Generator::Keyword::Enum.valid_param(schema)
         elsif schema.key?("multipleOf")
-          generated_param = generators("number").valid_param(schema)
+          generators("number").valid_param(schema)
         elsif schema.key?("items")
-          generated_param = generators("array").valid_param(schema)
+          generators("array").valid_param(schema)
         elsif schema.key?("$ref")
           raise "not impremented yet"
         elsif schema.key?("allOf")
-          generated_param = JSON::Fuzz::Generator::Keyword::AllOf.valid_param(schema)
+          JSON::Fuzz::Generator::Keyword::AllOf.valid_param(schema)
         elsif schema.key?("anyOf")
-          generated_param = JSON::Fuzz::Generator::Keyword::AnyOf.valid_param(schema)
+          JSON::Fuzz::Generator::Keyword::AnyOf.valid_param(schema)
         elsif schema.key?("oneOf")
-          generated_param = JSON::Fuzz::Generator::Keyword::OneOf.valid_param(schema)
+          JSON::Fuzz::Generator::Keyword::OneOf.valid_param(schema)
         elsif schema.key?("not")
-          generated_param = JSON::Fuzz::Generator::Keyword::Not.valid_param(schema)
+          JSON::Fuzz::Generator::Keyword::Not.valid_param(schema)
         else
-          raise "Not impremented generator for schema:#{schema}"
+          raise "Not implemented generator for schema:#{schema}"
         end
-
-        generated_param
       end
 
       private

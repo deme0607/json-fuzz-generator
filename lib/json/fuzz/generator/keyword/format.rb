@@ -30,8 +30,13 @@ module JSON
             def format_to_invalid_params(format)
               {
                 "ip-address" => [
-                  "1.1.1", "1.1.1.300", 5, 
-                  "1.1.1", "1.1.1.1b",  "b1.1.1.1"
+                  5, false
+                  # The following are incorrectly considered valid
+                  # See: https://github.com/davishmcclurg/json_schemer/issues/151
+                  # "1", "1.1", "1.1.1", "1.1.1.1.1.1.1.1.1.1.1.1.1"
+                  # "1.1.1.300",
+                  # "1.1.1.1b", "b1.1.1.1"
+                  # "donut"
                 ],
                 "ipv6" => [
                   "1111:2222:8888:99999:aaaa:cccc:eeee:ffff",
@@ -39,19 +44,22 @@ module JSON
                   "1111:2222::9999::cccc:eeee:ffff",
                   "1111:2222:8888:9999:aaaa:cccc:eeee:ffff:bbbb",
                 ],
+                # https://ijmacd.github.io/rfc3339-iso8601/
                 "time" => [
                   "12:00",   "12:00:60",  "12:60:00", "24:00:00",
-                  "0:00:00", "-12:00:00", "12:00:00b"
+                  "0:00:00", "-12:00:00", "12:00:00b", "12:00:00"
                 ],
+                # https://ijmacd.github.io/rfc3339-iso8601/
                 "date" => [
                   "2010-01-32", "n2010-01-01", "2010-1-01", 
                   "2010-01-1",  "2010-01-01n"
                 ],
+                # https://ijmacd.github.io/rfc3339-iso8601/
                 "date-time" => [
                   "2010-01-32T12:00:00Z", "2010-13-01T12:00:00Z",
                   "2010-01-01T24:00:00Z", "2010-01-01T12:60:00Z",
-                  "2010-01-01T12:00:60Z", "2010-01-01T12:00:00z",
-                  "2010-01-0112:00:00Z",
+                  "2010-01-01T12:00:60Z", "2010-01-0112:00:00Z",
+                  "2010-01-01T12:00:00+0000"
                 ],
                 "uri" => [
                   "::hoge",
@@ -72,16 +80,19 @@ module JSON
                     "1111:0:8888:0:0:0:eeee:ffff",
                     "1111:2222:8888::eeee:ffff",
                 ],
-                "time" => ["12:00:00"],
+                # https://ijmacd.github.io/rfc3339-iso8601/
+                "time" => ["12:00:00Z"],
+                # https://ijmacd.github.io/rfc3339-iso8601/
                 "date" => ["1992-06-27"],
+                # https://ijmacd.github.io/rfc3339-iso8601/
                 "date-time" => [
                   "2010-01-01T12:00:00Z",
                   "2010-01-01T12:00:00.1Z",
                   "2010-01-01T12:00:00,1Z",
-                  "2010-01-01T12:00:00+0000",
+                  "2010-01-01T12:00:00z", # RFC3339 is case-insensitive!
                   "2010-01-01T12:00:00+00:00",
                 ],
-                "uri" => ["http://gitbuh.com"],
+                "uri" => ["http://example.com"],
                 "email" => ["hoge@example.com"],
               }[format]
             end

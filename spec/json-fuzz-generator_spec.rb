@@ -35,7 +35,7 @@ describe JSON::Fuzz do
       context "given integer and string" do
         it_behaves_like JSON::Fuzz::Generator do
           let(:schema) {{
-            "$schema" => "http://json-schema.org/draft-04/schema#", 
+            "$schema" => "http://json-schema.org/draft-04/schema#",
             "type"    => ["integer", "string"],
           }}
         end
@@ -44,7 +44,7 @@ describe JSON::Fuzz do
       context "given string and null" do
         it_behaves_like JSON::Fuzz::Generator do
           let(:schema) {{
-            "$schema" => "http://json-schema.org/draft-04/schema#", 
+            "$schema" => "http://json-schema.org/draft-04/schema#",
             "type"    => ["string", "null"],
           }}
         end
@@ -53,7 +53,7 @@ describe JSON::Fuzz do
       context "given integer and object" do
         it_behaves_like JSON::Fuzz::Generator do
           let(:schema) {{
-            "$schema" => "http://json-schema.org/draft-04/schema#", 
+            "$schema" => "http://json-schema.org/draft-04/schema#",
             "type"    => ["integer", "object"],
           }}
         end
@@ -64,7 +64,7 @@ describe JSON::Fuzz do
   context "required" do
     it_behaves_like JSON::Fuzz::Generator do
       let(:schema) {{
-        "$schema"    => "http://json-schema.org/draft-04/schema#", 
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
         "required"   => ["a"],
         "properties" => {
           "a" => {},
@@ -77,7 +77,7 @@ describe JSON::Fuzz do
     context "without exclusiveMinimum" do
       it_behaves_like JSON::Fuzz::Generator do
         let(:schema) {{
-          "$schema"    => "http://json-schema.org/draft-04/schema#", 
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
           "properties" => {
             "a" => {"minimum" => 100},
           },
@@ -88,7 +88,7 @@ describe JSON::Fuzz do
     context "with exclusiveMinimum" do
       it_behaves_like JSON::Fuzz::Generator do
         let(:schema) {{
-          "$schema"    => "http://json-schema.org/draft-04/schema#", 
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
           "properties" => {
             "a" => {
               "minimum"          => 100,
@@ -104,7 +104,7 @@ describe JSON::Fuzz do
     context "without exclusiveMaximum" do
       it_behaves_like JSON::Fuzz::Generator do
         let(:schema) {{
-          "$schema"    => "http://json-schema.org/draft-04/schema#", 
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
           "properties" => {
             "a" => {"maximum" => 3},
           },
@@ -115,7 +115,7 @@ describe JSON::Fuzz do
     context "with exclusiveMaximum" do
       it_behaves_like JSON::Fuzz::Generator do
         let(:schema) {{
-          "$schema"    => "http://json-schema.org/draft-04/schema#", 
+          "$schema"    => "http://json-schema.org/draft-04/schema#",
           "properties" => {
             "a" => {
               "maximum"          => 3,
@@ -130,7 +130,7 @@ describe JSON::Fuzz do
   context "minItems" do
     it_behaves_like JSON::Fuzz::Generator do
       let(:schema) {{
-        "$schema"    => "http://json-schema.org/draft-04/schema#", 
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
         "properties" => {
           "a" => {"minItems" => 5},
         },
@@ -141,7 +141,7 @@ describe JSON::Fuzz do
   context "maxItems" do
     it_behaves_like JSON::Fuzz::Generator do
       let(:schema) {{
-        "$schema"    => "http://json-schema.org/draft-04/schema#", 
+        "$schema"    => "http://json-schema.org/draft-04/schema#",
         "properties" => {
           "a" => {"maxItems" => 3},
         },
@@ -152,7 +152,7 @@ describe JSON::Fuzz do
   context "minProperties" do
     it_behaves_like JSON::Fuzz::Generator do
       let(:schema) {{
-        "$schema"       => "http://json-schema.org/draft-04/schema#", 
+        "$schema"       => "http://json-schema.org/draft-04/schema#",
         "minProperties" => 2,
         "properties"    => {},
       }}
@@ -162,7 +162,7 @@ describe JSON::Fuzz do
   context "maxProperties" do
     it_behaves_like JSON::Fuzz::Generator do
       let(:schema) {{
-        "$schema"       => "http://json-schema.org/draft-04/schema#", 
+        "$schema"       => "http://json-schema.org/draft-04/schema#",
         "maxProperties" => 2,
         "properties"    => {},
       }}
@@ -176,7 +176,7 @@ describe JSON::Fuzz do
       context "#default_param" do
         it "can generate valid parameter" do
           valid_parameter = generator.default_param(schema, :strict => true)
-          expect(JSON::Validator.validate(schema, valid_parameter, :strict => true)).to eq(true)
+          expect(JSONSchemer.schema(schema).validate(valid_parameter, :strict => true)).to eq(true)
         end
       end
 
@@ -184,7 +184,7 @@ describe JSON::Fuzz do
         it "can generate invalid parameter" do
           invalid_parameters = generator.generate(schema, :strict => true)
           invalid_parameters.each do |invalid_param|
-            expect(JSON::Validator.validate(schema, invalid_param, :strict => true)).to eq(false)
+            expect(JSONSchemer.schema(schema).validate(invalid_param, :strict => true)).to eq(false)
           end
         end
       end
