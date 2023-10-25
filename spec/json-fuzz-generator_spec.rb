@@ -419,7 +419,7 @@ describe JSON::Fuzz do
     end
   end
 
-  %w[ip-address ipv6 time date date-time uri].each do |format|
+  %w[ipv4 ipv6 time date date-time uri].each do |format|
     context "format #{format}" do
       it_behaves_like JSON::Fuzz::Generator do
         let(:schema) {{
@@ -444,7 +444,7 @@ describe JSON::Fuzz do
         "properties" => {
           "a" => {
             "type"   => ["string", "null"],
-            "format" => "ip-address",
+            "format" => "ipv4",
           },
         },
       }}

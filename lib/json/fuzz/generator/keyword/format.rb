@@ -29,14 +29,11 @@ module JSON
             private
             def format_to_invalid_params(format)
               {
-                "ip-address" => [
-                  5, false
-                  # The following are incorrectly considered valid
-                  # See: https://github.com/davishmcclurg/json_schemer/issues/151
-                  # "1", "1.1", "1.1.1", "1.1.1.1.1.1.1.1.1.1.1.1.1"
-                  # "1.1.1.300",
-                  # "1.1.1.1b", "b1.1.1.1"
-                  # "donut"
+                "ipv4" => [
+                  "1", "1.1", "1.1.1", "1.1.1.1.1.1.1.1.1.1.1.1.1",
+                  "1.1.1.300",
+                  "1.1.1.1b", "b1.1.1.1",
+                  "donut",
                 ],
                 "ipv6" => [
                   "1111:2222:8888:99999:aaaa:cccc:eeee:ffff",
@@ -74,7 +71,7 @@ module JSON
             
             def format_to_valid_params(format)
               {
-                "ip-address" => ["1.1.1.1"],
+                "ipv4" => ["1.1.1.1"],
                 "ipv6" => [
                     "1111:2222:8888:9999:aaaa:cccc:eeee:ffff",
                     "1111:0:8888:0:0:0:eeee:ffff",
