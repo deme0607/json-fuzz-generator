@@ -91,6 +91,15 @@ JSON::Fuzz::Generator.generate(schema_file)
 #]
 ```
 
+## Development
+
+Run tests!
+
+```shell
+bundle install
+bundle exec rspec spec
+```
+
 ## Contributing
 
 1. Fork it ( https://github.com/deme0607/json-fuzz-generator/fork )
