@@ -28,7 +28,7 @@ module JSON
               generated_params = []
 
               one_of.each do |schema|
-                temp_params = JSON::Fuzz::Generator.generate(schema).select do |param|
+                temp_params = JSON::Fuzz::Generator.default_param(schema).select do |param|
                   ::JSONSchemer.schema(attributes).validate(param)
                 end
                 temp_params.each {|e| generated_params << e}
