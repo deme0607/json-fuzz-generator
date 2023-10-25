@@ -1,12 +1,12 @@
-# JSON::Fuzz::Generator
+# JSONSchemer::Fuzz
 
-Fuzzing Parameter Generator from JSON Schema
+A JSON FUZZ Generator in Ruby from JSON Schema files.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'json-fuzz-generator'
+    gem 'json_schemer-fuzz'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install json-fuzz-generator
+    $ gem install json_schemer-fuzz
 
 ## Usage
 
@@ -44,7 +44,7 @@ Or install it yourself as:
 ```ruby
 require "json-fuzz-generator"
  
-JSON::Fuzz::Generator.default_param(schema_file)
+JSONSchemer::Fuzz.default_param(schema_file)
 # => {"id"=>0, "name"=>"hoge", "birthday"=>"1992-06-27"}
 ```
 ### generate invalid params
@@ -52,7 +52,7 @@ JSON::Fuzz::Generator.default_param(schema_file)
 ```ruby
 require "json-fuzz-generator"
  
-JSON::Fuzz::Generator.generate(schema_file)
+JSONSchemer::Fuzz.generate(schema_file)
 # => 
 #[
 #  ["sample", "array"],
