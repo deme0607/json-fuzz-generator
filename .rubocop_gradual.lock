@@ -2,9 +2,9 @@
   "bin/bundle:4028066867": [
     [64, 5, 20, "ThreadSafety/InstanceVariableInClassMethod: Avoid instance variables in class methods.", 2485198147]
   ],
-  "lib/json_schemer/fuzz.rb:1352415604": [
-    [33, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481],
-    [115, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481]
+  "lib/json_schemer/fuzz.rb:3885649373": [
+    [34, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481],
+    [116, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481]
   ],
   "lib/json_schemer/fuzz/keyword/dependencies.rb:1332783787": [
     [38, 17, 63, "Performance/RedundantMerge: Use `template[required_key] = template[template.keys.sample]` instead of `template.merge!(required_key => template[template.keys.sample])`.", 1795061829]
