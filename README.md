@@ -46,86 +46,105 @@ Or install it yourself as:
 
 ## Usage
 
-### input JSON Schema
-
-```json:input_schema.json
-{
-  "title": "Basic Schema",
-  "type": "object",
-  "properties": {
-    "id" : {
-      "type": "integer",
-      "minimum": 0
-    },
-    "name": {
-      "type": "string"
-    },
-    "birthday": {
-      "type": "string",
-      "format": "date"
-    }
-  }
-}
-```
 ### generate valid param
 
-```#<--rubocop/md-->ruby
-require "json-fuzz-generator"
+```ruby
+require "json_schema-fuzz"
 
-JSONSchemer::Fuzz.default_param(schema_file)
+json = <<~JSON
+  {
+    "title": "Basic Schema",
+    "type": "object",
+    "properties": {
+      "id" : {
+        "type": "integer",
+        "minimum": 0
+      },
+      "name": {
+        "type": "string"
+      },
+      "birthday": {
+        "type": "string",
+        "format": "date"
+      }
+    }
+  }
+JSON
+
+schema = JSON.parse(json)
+JSONSchemer::Fuzz.default_param(schema)
 # => {"id"=>0, "name"=>"hoge", "birthday"=>"1992-06-27"}
 ```
+
 ### generate invalid params
 
-```#<--rubocop/md-->ruby
-require "json-fuzz-generator"
+```ruby
+require "json_schema-fuzz"
 
-JSONSchemer::Fuzz.generate(schema_file)
-# =>
-#[
-#  ["sample", "array"],
-#  true,
-#  73,
-#  nil,
-#  0.34259093948835795,
-#  "hoge",
-#  {"id"=>"a", "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>"1", "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>0.1, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>["sample", "array"], "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>false, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>nil, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>0.0, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>{}, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>"hoge", "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>-1, "name"=>"hoge", "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>["sample", "array"], "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>true, "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>97, "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>nil, "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>0.7547537108664406, "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>{}, "birthday"=>"1992-06-27"},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>["sample", "array"]},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>false},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>11},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>nil},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>0.5380909041403419},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>{}},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-32"},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>"n2010-01-01"},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-1-01"},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-1"},
-#  {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-01n"},
-#]
+json = <<~JSON
+  {
+    "title": "Basic Schema",
+    "type": "object",
+    "properties": {
+      "id" : {
+        "type": "integer",
+        "minimum": 0
+      },
+      "name": {
+        "type": "string"
+      },
+      "birthday": {
+        "type": "string",
+        "format": "date"
+      }
+    }
+  }
+JSON
+schema = JSON.parse(json)
+JSONSchemer::Fuzz.generate(schema)
+# => [
+#       ["sample", "array"],
+#       false,
+#       83,
+#       nil,
+#       0.8182545022111043,
+#       "hoge",
+#       {"id"=>"&", "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>[0.1], "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>["sample", "array"], "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>false, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>nil, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>0.0, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>{}, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>"hoge", "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>-1, "name"=>"hoge", "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>["sample", "array"], "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>true, "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>30, "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>nil, "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>0.8849255474901346, "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>{}, "birthday"=>"1992-06-27"},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>["sample", "array"]},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>true},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>62},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>nil},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>0.05006772646327107},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>{}},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-32"},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>"n2010-01-01"},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>"2010-1-01"},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-1"},
+#       {"id"=>0, "name"=>"hoge", "birthday"=>"2010-01-01n"}
+#     ]
 ```
 
 ## Development
 
 Run tests!
 
-```#<--rubocop/md-->shell
+```shell
 bundle install
-bundle exec rspec spec
+bundle exec rake
 ```
 
 ## Contributing
@@ -159,8 +178,8 @@ the [Pessimistic Version Constraint][📌pvc] with two digits of precision.
 
 For example:
 
-```#<--rubocop/md-->ruby
-spec.add_dependency "json_schemer-fuzz", "~> 1.0"
+```ruby
+spec.add_dependency("json_schemer-fuzz", "~> 1.0")
 ```
 
 [comment]: <> ( VERSIONING LINKS )
