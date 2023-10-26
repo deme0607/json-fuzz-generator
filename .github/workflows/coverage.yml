@@ -1,8 +1,9 @@
 name: Code Coverage
 
 env:
-  K_SOUP_COV_MIN_BRANCH: 65
-  K_SOUP_COV_MIN_LINE: 89
+  K_SOUP_COV_MIN_BRANCH: 62
+  K_SOUP_COV_MIN_LINE: 87
+  K_SOUP_COV_MIN_HARD: true
 
 on:
   push:

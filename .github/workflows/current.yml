@@ -1,5 +1,10 @@
 name: Current Ruby Support
 
+env:
+  K_SOUP_COV_MIN_BRANCH: 62
+  K_SOUP_COV_MIN_LINE: 87
+  K_SOUP_COV_MIN_HARD: false
+
 on:
   push:
     branches:
