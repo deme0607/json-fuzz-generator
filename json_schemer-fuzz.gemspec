@@ -11,6 +11,11 @@ Gem::Specification.new do |spec|
   spec.version       = gem_version
   spec.authors       = ["Peter Boling", "deme0607"]
   spec.email         = ["peter.boling@gmail.com", "hcs0035@gmail.com"]
+
+  # See CONTRIBUTING.md
+  spec.cert_chain = ["certs/pboling.pem"]
+  spec.signing_key = File.expand_path("~/.ssh/gem-private_key.pem") if $PROGRAM_NAME.end_with?("gem")
+
   spec.summary       = %q{Fuzz generator for json_schemer}
   spec.description   = %q{Fuzz generator for json_schemer}
   spec.homepage      = "https://github.com/pboling/json_schemer-fuzz"
