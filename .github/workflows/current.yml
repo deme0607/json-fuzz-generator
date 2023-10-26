@@ -55,7 +55,7 @@ jobs:
         uses: actions/checkout@v3
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: dictionaries-common
+          packages: dictionaries-common wamerican
           version: 1.0
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
