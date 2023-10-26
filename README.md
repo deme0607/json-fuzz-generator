@@ -2,6 +2,10 @@
 
 A JSON FUZZ Generator in Ruby from JSON Schema files.
 
+This gem is a re-write & renaming of dead-since-2015 [`json-fuzz-generator`](https://github.com/deme0607/json-fuzz-generator),
+It has been re-built on top of the modern [`json_schemer`](https://github.com/davishmcclurg/json_schemer)
+instead of the unmaintained `json-schema`.
+
 <div id="badges">
 
 [![Test Coverage][🔑cc-covi]][🔑cc-cov]
@@ -180,6 +184,7 @@ See [LICENSE.txt][📄license] for the official [Copyright Notice][📄copyright
 
 ### © Copyright
 
+* Copyright © 2014-2015 Naoki Shimizu
 * Copyright © 2023 [Peter H. Boling][💁🏼‍️peterboling] of [Rails Bling][💁🏼‍️railsbling]
 
 [comment]: <> ( COPYRIGHT LINKS )
