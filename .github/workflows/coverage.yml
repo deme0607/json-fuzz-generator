@@ -54,10 +54,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: dictionaries-common wamerican
-          version: 1.0
+#      - uses: awalsh128/cache-apt-pkgs-action@latest
+#        with:
+#          packages: dictionaries-common wamerican
+#          version: 1.0
+
+      - name: Install words
+        run: sudo apt-get install -y dictionaries-common wamerican
 
       - name: Setup Ruby & Bundle
         uses: ruby/setup-ruby@v1
