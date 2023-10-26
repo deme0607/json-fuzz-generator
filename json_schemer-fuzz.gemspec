@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Fuzz generator for json_schemer}
   spec.homepage      = "https://github.com/pboling/json_schemer-fuzz"
   spec.license       = "MIT"
+  spec.required_ruby_version = ">= 2.5.0"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
