@@ -1,6 +1,7 @@
 # External gems
 require "version_gem"
 require "json_schemer"
+require "file_exists" # must load before randexp
 require "randexp"
 
 # This gem

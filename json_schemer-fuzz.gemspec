@@ -48,6 +48,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency("json_schemer", "~> 2.0")
   spec.add_dependency("randexp", "~> 0.1.7")
+  # Remove once randexp is compatible with Ruby 3.2
+  spec.add_dependency("file_exists", "~> 0.2")
 
   # Utilities
   spec.add_dependency("version_gem", "~> 1.1", ">= 1.1.3")
