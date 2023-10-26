@@ -2,12 +2,14 @@
 require 'json_schemer'
 require 'pry'
 require 'byebug'
+# This does not require "simplecov",
+#   because that has a side-effect of running `.simplecov`
+require "kettle-soup-cover"
+
+require "simplecov" if Kettle::Soup::Cover::DO_COV
 
 # This gem
 require 'json_schemer-fuzz'
-
-SPEC_ROOT        = File.expand_path(File.dirname(__FILE__), ".")
-SPEC_SCHEMA_ROOT = File.join(SPEC_ROOT, "schemas")
 
 RSpec::Matchers.define :be_matching_schema do |schema|
   match do |actual|

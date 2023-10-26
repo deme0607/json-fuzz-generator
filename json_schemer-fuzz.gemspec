@@ -26,7 +26,8 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "version_gem", "~> 1.1", ">= 1.1.3"
 
-  spec.add_development_dependency "rake"
+  spec.add_development_dependency "kettle-soup-cover", "~> 1.0", ">= 1.0.2"
+  spec.add_development_dependency "rake", "~> 13.0"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "pry-byebug"
 end
