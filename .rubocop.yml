@@ -1,0 +1,39 @@
+# We want Exclude directives from different
+# config files to get merged, not overwritten
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-lts
+  - rubocop-packaging
+
+inherit_gem:
+  rubocop-lts: config/rubygem_rspec.yml
+
+# Metrics cops are disabled in Standard by default)
+Metrics:
+  Enabled: true
+
+Layout/LineLength:
+  Max: 120
+
+# Inside a RubyGem do not require a Gemfile to have defined versions.
+# In fact, runtime dependencies that must be declared inside the Gemfile to override the source
+#   should *not* specify a version.  Instead, they should rely on the version given by the gemspec.
+# We do require the gemspec to have specified versions via cop Gemspec/DependencyVersion.
+Bundler/GemVersion:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: true
+  TreatCommentsAsGroupSeparators: false
+
+# Normally RuboCop-RSpec enforces the use of RSpec's built-in PredicateMatchers
+# But these are too magic, and the auto-correct very often gets it wrong,
+#   and it doesn't handle methods with arguments properly.
+# However, many predicate matchers are useful, so we want to use them sometimes,
+#   like `be_a` instead of `is_a?`.
+# So we turn off the PredicateMatcher rule.
+RSpec/PredicateMatcher:
+  Enabled: false

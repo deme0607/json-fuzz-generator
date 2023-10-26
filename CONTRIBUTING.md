@@ -24,7 +24,7 @@ To release a new version:
 9. Run `bundle exec rake build`
 10. Run [`bin/checksums`](https://github.com/rubygems/guides/pull/325) to create SHA-256 and SHA-512 checksums
    a. Checksums will be committed automatically by the script, but not pushed
-11. Run `bundle exec rake release` which will create a git tag for the version, 
+11. Run `bundle exec rake release` which will create a git tag for the version,
    push git commits and tags, and push the `.gem` file to [rubygems.org][💎rubygems]
 
 NOTE: You will need to have a public key in `certs/`, and list your cert in the

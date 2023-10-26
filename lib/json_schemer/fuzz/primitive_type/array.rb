@@ -37,10 +37,10 @@ module JSONSchemer
 
           def keyword_to_class_map
             {
-              "minItems"    => JSONSchemer::Fuzz::Keyword::MinItems,
-              "maxItems"    => JSONSchemer::Fuzz::Keyword::MaxItems,
+              "minItems" => JSONSchemer::Fuzz::Keyword::MinItems,
+              "maxItems" => JSONSchemer::Fuzz::Keyword::MaxItems,
               "uniqueItems" => JSONSchemer::Fuzz::Keyword::UniqueItems,
-              "items"       => JSONSchemer::Fuzz::Keyword::Items,
+              "items" => JSONSchemer::Fuzz::Keyword::Items,
             }
           end
         end
@@ -48,4 +48,3 @@ module JSONSchemer
     end
   end
 end
-

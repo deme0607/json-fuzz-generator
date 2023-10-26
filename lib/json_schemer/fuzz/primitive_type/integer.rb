@@ -8,7 +8,7 @@ module JSONSchemer
             if type = attributes["type"]
               valid_types = [type].flatten
               # TODO: Ideally this array would include a string number, as that is the intent here
-              ["&"].each {|val| generated_params << val} unless valid_types.include?("string")
+              ["&"].each { |val| generated_params << val } unless valid_types.include?("string")
               # TODO: Ideally 0.1 would work here as invalid, as it is not an integer
               #       But it doesn't, so instead we use an array
               generated_params << [0.1] unless valid_types.include?("number")
@@ -43,8 +43,8 @@ module JSONSchemer
 
           def keyword_to_class_map
             {
-              "minimum"    => JSONSchemer::Fuzz::Keyword::Minimum,
-              "maximum"    => JSONSchemer::Fuzz::Keyword::Maximum,
+              "minimum" => JSONSchemer::Fuzz::Keyword::Minimum,
+              "maximum" => JSONSchemer::Fuzz::Keyword::Maximum,
               "multipleOf" => JSONSchemer::Fuzz::Keyword::MultipleOf,
             }
           end

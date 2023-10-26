@@ -38,8 +38,8 @@ module JSONSchemer
 
           def keyword_to_class_map
             {
-              "minimum"    => JSONSchemer::Fuzz::Keyword::Minimum,
-              "maximum"    => JSONSchemer::Fuzz::Keyword::Maximum,
+              "minimum" => JSONSchemer::Fuzz::Keyword::Minimum,
+              "maximum" => JSONSchemer::Fuzz::Keyword::Maximum,
               "multipleOf" => JSONSchemer::Fuzz::Keyword::MultipleOf,
             }
           end

@@ -14,7 +14,7 @@ module JSONSchemer
               temp_params = JSONSchemer::Fuzz.generate(schema).reject do |param|
                 ::JSONSchemer.schema(attributes).validate(param)
               end
-              temp_params.each {|e| generated_params << e}
+              temp_params.each { |e| generated_params << e }
             end
 
             raise "failed to generate invalid_params for schema: #{attributes}" if generated_params.empty?

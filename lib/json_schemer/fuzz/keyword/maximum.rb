@@ -16,7 +16,7 @@ module JSONSchemer
               generated_params.push(maximum_value + unit_value)
             end
 
-            return generated_params
+            generated_params
           end
 
           def valid_param(attributes)
@@ -29,12 +29,12 @@ module JSONSchemer
             if minimum_value = attributes["minimum"]
               minimum_value += unit_value if attributes["exclusiveMinimum"]
               if attributes["exclusiveMaximum"]
-                return Random.rand(minimum_value...maximum_value)
+                Random.rand(minimum_value...maximum_value)
               else
-                return Random.rand(minimum_value..maximum_value)
+                Random.rand(minimum_value..maximum_value)
               end
             else
-              return maximum_value
+              maximum_value
             end
           end
         end

@@ -6,7 +6,7 @@ module JSONSchemer
           # @return Array
           def invalid_params(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            items  = attributes.delete("items")
+            items = attributes.delete("items")
             raise "No items keyword given: #{attributes}" unless items
 
             generated_params = []
@@ -45,7 +45,7 @@ module JSONSchemer
 
           def valid_param(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            items  = attributes.delete("items")
+            items = attributes.delete("items")
             raise "No items keyword given: #{attributes}" unless items
 
             generated_param = []

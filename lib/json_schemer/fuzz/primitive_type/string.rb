@@ -37,10 +37,10 @@ module JSONSchemer
 
           def keyword_to_class_map
             {
-              "pattern"   => JSONSchemer::Fuzz::Keyword::Pattern,
+              "pattern" => JSONSchemer::Fuzz::Keyword::Pattern,
               "minLength" => JSONSchemer::Fuzz::Keyword::MinLength,
               "maxLength" => JSONSchemer::Fuzz::Keyword::MaxLength,
-              "format"    => JSONSchemer::Fuzz::Keyword::Format,
+              "format" => JSONSchemer::Fuzz::Keyword::Format,
             }
           end
         end

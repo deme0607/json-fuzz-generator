@@ -11,7 +11,7 @@ module JSONSchemer
 
             generated_params << /\w{1}/.gen * (min_length - 1)
 
-            return generated_params
+            generated_params
           end
 
           def valid_param(attributes)

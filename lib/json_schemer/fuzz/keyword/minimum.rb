@@ -16,7 +16,7 @@ module JSONSchemer
               generated_params.push(minimum_value - unit_value)
             end
 
-            return generated_params
+            generated_params
           end
 
           def valid_param(attributes)

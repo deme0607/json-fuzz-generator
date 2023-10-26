@@ -34,7 +34,7 @@ module JSONSchemer
             # Only one of the oneOf can be valid, the others must not be, as it is an XOR
             # If one of the oneOf's is required,
             #   then then match for that schema cannot also match the other schemas.
-            required_schema_index = one_of.index {|oof| oof["required"] }
+            required_schema_index = one_of.index { |oof| oof["required"] }
             required_schema = one_of.delete_at(required_schema_index)
             if required_schema
               valid_required_param = JSONSchemer::Fuzz.default_param(required_schema).detect do |param|

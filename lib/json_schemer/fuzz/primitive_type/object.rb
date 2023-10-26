@@ -38,13 +38,13 @@ module JSONSchemer
 
           def keyword_to_class_map
             {
-              "members"              => JSONSchemer::Fuzz::Keyword::Properties,
-              "properties"           => JSONSchemer::Fuzz::Keyword::Properties,
-              "required"             => JSONSchemer::Fuzz::Keyword::Required,
-              "minProperties"        => JSONSchemer::Fuzz::Keyword::MinProperties,
-              "maxProperties"        => JSONSchemer::Fuzz::Keyword::MaxProperties,
+              "members" => JSONSchemer::Fuzz::Keyword::Properties,
+              "properties" => JSONSchemer::Fuzz::Keyword::Properties,
+              "required" => JSONSchemer::Fuzz::Keyword::Required,
+              "minProperties" => JSONSchemer::Fuzz::Keyword::MinProperties,
+              "maxProperties" => JSONSchemer::Fuzz::Keyword::MaxProperties,
               "additionalProperties" => JSONSchemer::Fuzz::Keyword::AdditionalProperties,
-              "dependencies"         => JSONSchemer::Fuzz::Keyword::Dependencies,
+              "dependencies" => JSONSchemer::Fuzz::Keyword::Dependencies,
             }
           end
         end

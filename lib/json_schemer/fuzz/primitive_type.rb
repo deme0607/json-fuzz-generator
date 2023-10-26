@@ -29,4 +29,3 @@ module JSONSchemer
     end
   end
 end
-

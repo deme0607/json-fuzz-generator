@@ -11,13 +11,13 @@ require_relative "fuzz/primitive_type"
 module JSONSchemer
   module Fuzz
     GENERATOR_MAP = {
-      "array"   => JSONSchemer::Fuzz::PrimitiveType::Array,
+      "array" => JSONSchemer::Fuzz::PrimitiveType::Array,
       "boolean" => JSONSchemer::Fuzz::PrimitiveType::Boolean,
       "integer" => JSONSchemer::Fuzz::PrimitiveType::Integer,
-      "null"    => JSONSchemer::Fuzz::PrimitiveType::Null,
-      "number"  => JSONSchemer::Fuzz::PrimitiveType::Number,
-      "object"  => JSONSchemer::Fuzz::PrimitiveType::Object,
-      "string"  => JSONSchemer::Fuzz::PrimitiveType::String,
+      "null" => JSONSchemer::Fuzz::PrimitiveType::Null,
+      "number" => JSONSchemer::Fuzz::PrimitiveType::Number,
+      "object" => JSONSchemer::Fuzz::PrimitiveType::Object,
+      "string" => JSONSchemer::Fuzz::PrimitiveType::String,
     }.freeze
 
     extend self
@@ -51,21 +51,21 @@ module JSONSchemer
             generated_params.push(invalid_param)
           end
         end
-      elsif (schema.key?("members") || schema.key?("properties"))
+      elsif schema.key?("members") || schema.key?("properties")
         generators("object").invalid_params(schema).each do |invalid_param|
           generated_params.push(invalid_param)
         end
       elsif schema.empty?
         # do nothing
-      elsif (schema.key?("minimum") || schema.key?("maximum"))
+      elsif schema.key?("minimum") || schema.key?("maximum")
         generators("number").invalid_params(schema).each do |invalid_param|
           generated_params.push(invalid_param)
         end
-      elsif (schema.key?("minItems") || schema.key?("maxItems"))
+      elsif schema.key?("minItems") || schema.key?("maxItems")
         generators("array").invalid_params(schema).each do |invalid_param|
           generated_params << invalid_param
         end
-      elsif (schema.key?("minProperties") || schema.key?("maxProperties"))
+      elsif schema.key?("minProperties") || schema.key?("maxProperties")
         generators("object").invalid_params(schema).each do |invalid_param|
           generated_params << invalid_param
         end
@@ -77,7 +77,7 @@ module JSONSchemer
         generators("string").invalid_params(schema).each do |invalid_param|
           generated_params << invalid_param
         end
-      elsif (schema.key?("minLength") || schema.key?("maxLength"))
+      elsif schema.key?("minLength") || schema.key?("maxLength")
         generators("string").invalid_params(schema).each do |invalid_param|
           generated_params << invalid_param
         end
@@ -95,7 +95,7 @@ module JSONSchemer
         end
       elsif schema.key?("$ref")
         raise "not impremented yet"
-      elsif (schema.key?("allOf") || schema.key?("anyOf") || schema.key?("oneOf"))
+      elsif schema.key?("allOf") || schema.key?("anyOf") || schema.key?("oneOf")
         generators("object").invalid_params(schema).each do |invalid_param|
           generated_params << invalid_param
         end
@@ -123,17 +123,17 @@ module JSONSchemer
       elsif schema.empty?
         _, generator = JSONSchemer::Fuzz::GENERATOR_MAP.to_a.sample
         generator.valid_param
-      elsif (schema.key?("minimum") || schema.key?("maximum"))
+      elsif schema.key?("minimum") || schema.key?("maximum")
         generators("number").valid_param(schema)
-      elsif (schema.key?("minItems") || schema.key?("maxItems"))
+      elsif schema.key?("minItems") || schema.key?("maxItems")
         generators("array").valid_param(schema)
-      elsif (schema.key?("minProperties") || schema.key?("maxProperties"))
+      elsif schema.key?("minProperties") || schema.key?("maxProperties")
         generators("object").valid_param(schema)
       elsif schema.key?("uniqueItems")
         generators("array").valid_param(schema)
       elsif schema.key?("pattern")
         generators("string").valid_param(schema)
-      elsif (schema.key?("minLength") || schema.key?("maxLength"))
+      elsif schema.key?("minLength") || schema.key?("maxLength")
         generators("string").valid_param(schema)
       elsif schema.key?("enum")
         JSONSchemer::Fuzz::Keyword::Enum.valid_param(schema)
@@ -157,6 +157,7 @@ module JSONSchemer
     end
 
     private
+
     def all_types
       %w[array boolean integer null number object string]
     end

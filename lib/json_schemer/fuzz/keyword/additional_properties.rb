@@ -12,7 +12,7 @@ module JSONSchemer
             template = JSONSchemer::Fuzz.default_param(attributes)
 
             additional_key = nil
-            until (additional_key)
+            until additional_key
               key = /\w+/.gen
               additional_key = key unless template.key?(key)
             end
@@ -36,15 +36,14 @@ module JSONSchemer
             template = JSONSchemer::Fuzz.default_param(attributes)
 
             if additional_properties
-              additional_param = nil
-              if additional_properties.instance_of?(Hash)
-                additional_param = JSONSchemer::Fuzz.default_param(additional_properties)
+              additional_param = if additional_properties.instance_of?(Hash)
+                JSONSchemer::Fuzz.default_param(additional_properties)
               else
-                additional_param = template[template.keys.sample]
+                template[template.keys.sample]
               end
 
               additional_key = nil
-              until (additional_key)
+              until additional_key
                 key = /\w+/.gen
                 additional_key = key unless template.key?(key)
               end

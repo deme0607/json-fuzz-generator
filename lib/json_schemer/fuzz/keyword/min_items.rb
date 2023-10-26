@@ -5,11 +5,11 @@ module JSONSchemer
         class << self
           def invalid_params(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            min_items  = attributes.delete("minItems")
+            min_items = attributes.delete("minItems")
             raise "No minItems keyword given: #{attributes}" unless min_items
 
             generated_params = []
-            invalid_param    = []
+            invalid_param = []
 
             (min_items - 1).times do
               invalid_param << JSONSchemer::Fuzz.default_param(attributes)
@@ -22,7 +22,7 @@ module JSONSchemer
 
           def valid_param(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            min_items  = attributes.delete("minItems")
+            min_items = attributes.delete("minItems")
             raise "No minItems keyword given: #{attributes}" unless min_items
 
             generated_param = []

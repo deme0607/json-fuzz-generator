@@ -6,11 +6,11 @@ module JSONSchemer
           # @return Array
           def invalid_params(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            max_items  = attributes.delete("maxItems")
+            max_items = attributes.delete("maxItems")
             raise "No maxItems keyword given: #{attributes}" unless max_items
 
             generated_params = []
-            invalid_param    = []
+            invalid_param = []
 
             (max_items + 1).times do
               item = JSONSchemer::Fuzz.default_param(attributes)
@@ -25,7 +25,7 @@ module JSONSchemer
 
           def valid_param(attributes)
             attributes = Marshal.load(Marshal.dump(attributes))
-            max_items  = attributes.delete("maxItems")
+            max_items = attributes.delete("maxItems")
             raise "No maxItems keyword given: #{attributes}" unless max_items
 
             generated_param = []

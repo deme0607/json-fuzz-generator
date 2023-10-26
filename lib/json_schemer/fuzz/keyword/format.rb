@@ -5,34 +5,39 @@ module JSONSchemer
         class << self
           # @return Array
           def invalid_params(attributes)
-            format  = attributes["format"]
+            format = attributes["format"]
             raise "No format keyword given: #{attributes}" unless format
 
             if invalid_params = format_to_invalid_params(format)
-              return invalid_params
+              invalid_params
             else
               raise "invalid format type: #{attributes}"
             end
           end
 
           def valid_param(attributes)
-            format  = attributes["format"]
+            format = attributes["format"]
             raise "No format keyword given: #{attributes}" unless format
 
             if valid_params = format_to_valid_params(format)
-              return valid_params.sample
+              valid_params.sample
             else
               raise "invalid format type: #{attributes}"
             end
           end
 
           private
+
           def format_to_invalid_params(format)
             {
               "ipv4" => [
-                "1", "1.1", "1.1.1", "1.1.1.1.1.1.1.1.1.1.1.1.1",
+                "1",
+                "1.1",
+                "1.1.1",
+                "1.1.1.1.1.1.1.1.1.1.1.1.1",
                 "1.1.1.300",
-                "1.1.1.1b", "b1.1.1.1",
+                "1.1.1.1b",
+                "b1.1.1.1",
                 "donut",
               ],
               "ipv6" => [
@@ -43,20 +48,32 @@ module JSONSchemer
               ],
               # https://ijmacd.github.io/rfc3339-iso8601/
               "time" => [
-                "12:00",   "12:00:60",  "12:60:00", "24:00:00",
-                "0:00:00", "-12:00:00", "12:00:00b", "12:00:00"
+                "12:00",
+                "12:00:60",
+                "12:60:00",
+                "24:00:00",
+                "0:00:00",
+                "-12:00:00",
+                "12:00:00b",
+                "12:00:00",
               ],
               # https://ijmacd.github.io/rfc3339-iso8601/
               "date" => [
-                "2010-01-32", "n2010-01-01", "2010-1-01",
-                "2010-01-1",  "2010-01-01n"
+                "2010-01-32",
+                "n2010-01-01",
+                "2010-1-01",
+                "2010-01-1",
+                "2010-01-01n",
               ],
               # https://ijmacd.github.io/rfc3339-iso8601/
               "date-time" => [
-                "2010-01-32T12:00:00Z", "2010-13-01T12:00:00Z",
-                "2010-01-01T24:00:00Z", "2010-01-01T12:60:00Z",
-                "2010-01-01T12:00:60Z", "2010-01-0112:00:00Z",
-                "2010-01-01T12:00:00+0000"
+                "2010-01-32T12:00:00Z",
+                "2010-13-01T12:00:00Z",
+                "2010-01-01T24:00:00Z",
+                "2010-01-01T12:60:00Z",
+                "2010-01-01T12:00:60Z",
+                "2010-01-0112:00:00Z",
+                "2010-01-01T12:00:00+0000",
               ],
               "uri" => [
                 "::hoge",

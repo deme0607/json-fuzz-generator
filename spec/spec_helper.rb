@@ -1,7 +1,5 @@
 # External gems
-require 'json_schemer'
-require 'pry'
-require 'byebug'
+require "json_schemer"
 # This does not require "simplecov",
 #   because that has a side-effect of running `.simplecov`
 require "kettle-soup-cover"
@@ -9,12 +7,11 @@ require "kettle-soup-cover"
 require "simplecov" if Kettle::Soup::Cover::DO_COV
 
 # This gem
-require 'json_schemer-fuzz'
+require "json_schemer-fuzz"
 
 RSpec::Matchers.define :be_matching_schema do |schema|
   match do |actual|
     schemer = JSONSchemer.schema(schema)
-    # byebug if schemer.valid?(actual) == false
     schemer.valid?(actual) == true
   end
   failure_message do |actual|
