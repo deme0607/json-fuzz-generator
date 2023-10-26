@@ -13,8 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.0] - 2023-10-26
 ### Added
-### Changed
-### Fixed
+- Initial release
 
 [Unreleased]: https://github.com/pboling/json_schemer-fuzz/v1.0.0...HEAD
 [1.0.0]: https://github.com/pboling/json_schemer-fuzz/compare/65fe2002d16ede8c5d2dab11b82ac20dab9000e2...v1.0.0
