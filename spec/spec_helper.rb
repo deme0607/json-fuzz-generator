@@ -1,14 +1,18 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
-require 'json-fuzz-generator'
-require 'json-schema'
-require 'pry'
+# External gems
+require "json_schemer"
+# This does not require "simplecov",
+#   because that has a side-effect of running `.simplecov`
+require "kettle-soup-cover"
 
-SPEC_ROOT        = File.expand_path(File.dirname(__FILE__), ".")
-SPEC_SCHEMA_ROOT = File.join(SPEC_ROOT, "schemas")
+require "simplecov" if Kettle::Soup::Cover::DO_COV
+
+# This gem
+require "json_schemer-fuzz"
 
 RSpec::Matchers.define :be_matching_schema do |schema|
   match do |actual|
-    JSON::Validator.validate(schema, actual) == true
+    schemer = JSONSchemer.schema(schema)
+    schemer.valid?(actual) == true
   end
   failure_message do |actual|
     "expected #{actual} to be match schema: #{schema}"
@@ -17,7 +21,8 @@ end
 
 RSpec::Matchers.define :be_not_matching_schema do |expected|
   match do |actual|
-    JSON::Validator.validate(schema, actual) == false
+    schemer = JSONSchemer.schema(schema)
+    schemer.valid?(actual) == false
   end
   failure_message do |actual|
     "expected #{actual} not to be match schema: #{schema}"

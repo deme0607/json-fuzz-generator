@@ -1,0 +1,177 @@
+{
+  "bin/bundle:4028066867": [
+    [64, 5, 20, "ThreadSafety/InstanceVariableInClassMethod: Avoid instance variables in class methods.", 2485198147]
+  ],
+  "lib/json_schemer/fuzz.rb:3885649373": [
+    [34, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481],
+    [116, 27, 4, "Security/Open: The use of `Kernel#open` is a serious security risk.", 2087926481]
+  ],
+  "lib/json_schemer/fuzz/keyword/dependencies.rb:1332783787": [
+    [38, 17, 63, "Performance/RedundantMerge: Use `template[required_key] = template[template.keys.sample]` instead of `template.merge!(required_key => template[template.keys.sample])`.", 1795061829]
+  ],
+  "lib/json_schemer/fuzz/keyword/format.rb:2811214301": [
+    [11, 31, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [22, 29, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/keyword/items.rb:1562675327": [
+    [15, 15, 18, "Style/IdenticalConditionalBranches: Move `invalid_param = []` out of the conditional.", 1769312831],
+    [19, 15, 33, "Style/IdenticalConditionalBranches: Move `generated_params << invalid_param` out of the conditional.", 3830689512],
+    [21, 15, 18, "Style/IdenticalConditionalBranches: Move `invalid_param = []` out of the conditional.", 1769312831],
+    [27, 15, 33, "Style/IdenticalConditionalBranches: Move `generated_params << invalid_param` out of the conditional.", 3830689512],
+    [36, 17, 28, "Style/IdenticalConditionalBranches: Move `generated_params << template` out of the conditional.", 4257119385],
+    [39, 17, 28, "Style/IdenticalConditionalBranches: Move `generated_params << template` out of the conditional.", 4257119385]
+  ],
+  "lib/json_schemer/fuzz/keyword/max_properties.rb:2057797841": [
+    [11, 13, 16, "Lint/UselessAssignment: Useless assignment to variable - `generated_params`.", 1321229865],
+    [12, 13, 13, "Lint/UselessAssignment: Useless assignment to variable - `invalid_param`.", 119173956],
+    [33, 15, 3, "Lint/UselessAssignment: Useless assignment to variable - `key`.", 193424690]
+  ],
+  "lib/json_schemer/fuzz/keyword/maximum.rb:1856659064": [
+    [29, 30, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/keyword/min_items.rb:2300461665": [
+    [32, 15, 4, "Lint/UselessAssignment: Useless assignment to variable - `item`.", 2087854480]
+  ],
+  "lib/json_schemer/fuzz/keyword/min_properties.rb:1979234444": [
+    [10, 13, 16, "Lint/UselessAssignment: Useless assignment to variable - `generated_params`.", 1321229865],
+    [11, 13, 13, "Lint/UselessAssignment: Useless assignment to variable - `invalid_param`.", 119173956]
+  ],
+  "lib/json_schemer/fuzz/keyword/minimum.rb:2946900628": [
+    [29, 30, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/keyword/one_of.rb:435152347": [
+    [9, 13, 90, "Style/InvertibleUnlessCondition: Favor `if` with inverted condition over `unless`.", 1161320627],
+    [30, 13, 90, "Style/InvertibleUnlessCondition: Favor `if` with inverted condition over `unless`.", 1161320627]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/array.rb:3480791379": [
+    [9, 16, 4, "Lint/UselessAssignment: Useless assignment to variable - `type`.", 2087944093],
+    [9, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [16, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [30, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/boolean.rb:1755177903": [
+    [9, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/integer.rb:762712226": [
+    [8, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [36, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/null.rb:549448753": [
+    [8, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/number.rb:1516935928": [
+    [8, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [17, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [31, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/object.rb:1662274734": [
+    [9, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [10, 15, 11, "Lint/UselessAssignment: Useless assignment to variable - `valid_types`.", 2161506823],
+    [17, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [31, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "lib/json_schemer/fuzz/primitive_type/string.rb:1924486298": [
+    [8, 21, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [9, 15, 11, "Lint/UselessAssignment: Useless assignment to variable - `valid_types`.", 2161506823],
+    [16, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560],
+    [30, 24, 1, "Lint/AssignmentInCondition: Wrap assignment in parentheses if intentional", 177560]
+  ],
+  "spec/json_schemer-fuzz_spec.rb:1614865504": [
+    [1, 1, 0, "RSpec/SpecFilePathFormat: Spec path should end with `json_schemer/fuzz*_spec.rb`.", 5381],
+    [3, 1, 26, "RSpec/FilePath: Spec path should end with `json_schemer/fuzz*_spec.rb`.", 917313316],
+    [4, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [7, 27, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [14, 30, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [15, 9, 23, "RSpec/IteratedExpectation: Prefer using the `all` matcher instead of iterating over an array.", 2295542064],
+    [22, 11, 7, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 855950638],
+    [25, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [37, 7, 34, "RSpec/NestedGroups: Maximum example group nesting exceeded [4/3].", 4158433937],
+    [37, 15, 26, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3126022158],
+    [38, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [48, 7, 31, "RSpec/NestedGroups: Maximum example group nesting exceeded [4/3].", 4164625228],
+    [48, 15, 23, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 362948403],
+    [49, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [59, 7, 34, "RSpec/NestedGroups: Maximum example group nesting exceeded [4/3].", 2525294769],
+    [59, 15, 26, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 767789934],
+    [60, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [72, 11, 10, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 434753740],
+    [73, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [86, 11, 9, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3132475635],
+    [88, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [101, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [117, 11, 9, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 367753901],
+    [119, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [132, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [148, 11, 10, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3418760041],
+    [149, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [161, 11, 10, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 2359393271],
+    [162, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [174, 11, 15, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3107883918],
+    [175, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [186, 11, 15, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 2834583504],
+    [187, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [198, 3, 24, "RSpec/PendingWithoutReason: Give the reason for skip.", 3864463178],
+    [199, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [200, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [205, 89, 2, "RSpec/BeEq: Prefer `be` over `eq`.", 5860785],
+    [213, 89, 2, "RSpec/BeEq: Prefer `be` over `eq`.", 5860785],
+    [220, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [234, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [248, 5, 33, "RSpec/PendingWithoutReason: Give the reason for skip.", 3988428649],
+    [249, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [264, 11, 13, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 1005700080],
+    [265, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [277, 3, 18, "RSpec/PendingWithoutReason: Give the reason for skip.", 3125272522],
+    [278, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [290, 11, 11, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3090081363],
+    [291, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [303, 11, 11, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 559347085],
+    [304, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [316, 11, 6, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3132438838],
+    [317, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [329, 11, 12, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 153856252],
+    [330, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [342, 3, 28, "RSpec/PendingWithoutReason: Give the reason for skip.", 2225470571],
+    [343, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [355, 11, 22, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 433717565],
+    [356, 13, 21, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 1753748470],
+    [357, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [370, 13, 24, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 542263872],
+    [371, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [384, 5, 33, "RSpec/PendingWithoutReason: Give the reason for skip.", 3988428649],
+    [385, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [399, 11, 7, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 758364259],
+    [400, 13, 23, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 4294075755],
+    [401, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [411, 13, 27, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 1993960423],
+    [412, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [425, 13, 19, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3171454616],
+    [426, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [439, 7, 21, "RSpec/NestedGroups: Maximum example group nesting exceeded [4/3].", 2962703092],
+    [439, 15, 13, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 4054819595],
+    [440, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [454, 7, 24, "RSpec/NestedGroups: Maximum example group nesting exceeded [4/3].", 4160082094],
+    [454, 15, 16, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 1349720177],
+    [455, 25, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [471, 3, 25, "RSpec/PendingWithoutReason: Give the reason for skip.", 1968356757],
+    [472, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [487, 13, 18, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3678392096],
+    [488, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [505, 11, 25, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 2327527292],
+    [506, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [522, 11, 14, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 4103072396],
+    [523, 13, 23, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 4294075755],
+    [524, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [539, 13, 27, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 1993960423],
+    [540, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [556, 11, 9, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 3027277230],
+    [557, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [571, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [588, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [607, 11, 5, "RSpec/ContextWording: Context description should match /^when\\b/, /^with\\b/, or /^without\\b/.", 95231632],
+    [608, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [620, 23, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985],
+    [640, 3, 22, "RSpec/PendingWithoutReason: Give the reason for skip.", 1103993316],
+    [641, 21, 17, "RSpec/DescribedClass: Use `described_class` instead of `JSONSchemer::Fuzz`.", 3246646985]
+  ]
+}
